@@ -23,22 +23,7 @@ class Product:
             "url": self.url
         }
 
-    def save_to_json(self, filename):
-        with open(filename, "w") as file:
-            json.dump(self.to_dict(), file, indent=4)
-
-    @classmethod
-    def from_json(cls, filename):
-        product_list = []
-
-        with open(filename, "r") as file:
-            data = json.load(file)
-
-        for product in data:
-            product_obj = cls.from_dict(product)
-            product_list.append(product_obj)
-
-        return product_list
+   
         
                
 
