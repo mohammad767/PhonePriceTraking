@@ -5,16 +5,21 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 
-def save_products(products) : 
+def save_products(products):
     product_list = []
-    for product in products : 
-        product_dict = product.to_dict()
-        product_list.append(product_dict)
-        
+
+    for product in products:
+        product_list.append(product.to_dict())
+
     with open("data/products.json", "w", encoding="utf-8") as file:
-        json.dump(product_list, file, indent=4, ensure_ascii=False)
-    
-    return "File Created."
+        json.dump(
+            product_list,
+            file,
+            indent=4,
+            ensure_ascii=False
+        )
+
+    return "Products saved successfully."
 
             
 def load_products() : 

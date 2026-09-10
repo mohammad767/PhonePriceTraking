@@ -105,7 +105,8 @@ def parse_products(response):
         product = Product(
             name=name,
             price=price,
-            url=url
+            url=url,
+            source="technolife"
         )
 
         product_list.append(product)
@@ -288,9 +289,7 @@ def parse_digikala_products(data, base_url):
             continue
 
         variant = phone.get("default_variant") or {}
-
         price_info = variant.get("price") or {}
-
         price = price_info.get("selling_price")
 
         if price is None:
@@ -300,7 +299,6 @@ def parse_digikala_products(data, base_url):
             continue
 
         url_info = phone.get("url") or {}
-
         uri = url_info.get("uri")
 
         if not uri:
@@ -314,7 +312,8 @@ def parse_digikala_products(data, base_url):
         product = Product(
             name=name,
             price=price,
-            url=product_url
+            url=product_url,
+            source="digikala"
         )
 
         product_list.append(product)
@@ -323,12 +322,7 @@ def parse_digikala_products(data, base_url):
 
 
 
-
-def digikala_scraper(
-    category="mobile-phone",
-    params=None,
-    page=1
-):
+def digikala_scraper(category="mobile-phone",params=None,page=1):
     base_url = "https://www.digikala.com"
 
     url = (
@@ -422,10 +416,10 @@ def choose_digikala_filters():
 
 
 def handle_digikala_scrape():
-    brand = choose_digikala_brand()
-    params = choose_digikala_filters()
+    # brand = choose_digikala_brand()
+    # params = choose_digikala_filters()
 
-    params["brand[]"] = brand
+    # params["brand[]"] = brand
 
     all_products = []
     page = 1
@@ -434,7 +428,7 @@ def handle_digikala_scrape():
 
         products = digikala_scraper(
             category="mobile-phone",
-            params=params,
+            # params=params,
             page=page
         )
 
@@ -452,5 +446,5 @@ def handle_digikala_scrape():
             break
 
         page += 1
-
+    print(all_products)
     return all_products

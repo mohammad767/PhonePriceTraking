@@ -13,7 +13,8 @@ from app.storage import (
 
 from app.tracker import (
     find_product_by_url,
-    get_price_change
+    get_price_change,
+    update_products
 )
 
 
@@ -26,7 +27,8 @@ def update_prices():
     for new_product in new_products:
         old_product = find_product_by_url(
             old_products,
-            new_product.url
+            new_product.url,
+            new_product.source
         )
 
         if old_product is None:
@@ -41,7 +43,11 @@ def update_prices():
         price_changes.append(price_change)
 
     save_price_history(price_changes)
-    save_products(new_products)
+    updated_products = update_products(
+    old_products,
+    new_products
+    )
+    save_products(updated_products)
 
     print("Prices updated successfully.")
 

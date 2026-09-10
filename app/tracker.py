@@ -13,9 +13,9 @@ def compare_prices(old_price, new_price) :
   
   
   
-def find_product_by_url(products: list[Product], url: str) -> Product | None:
+def find_product_by_url(products: list[Product], url: str , source : str) -> Product | None:
     for product in products :
-        if product.url == url:
+        if product.url == url and product.source == source:
             return product
     return None
 
@@ -61,3 +61,27 @@ def get_price_change(old_product, new_product) :
             "timestamp": timestamp
         }
     return data
+
+
+def update_products(
+    old_products: list[Product],
+    new_products: list[Product]
+) -> list[Product]:
+
+    updated_products = old_products.copy()
+
+    for new_product in new_products:
+        old_product = find_product_by_url(
+            updated_products,
+            new_product.url,
+            new_product.source
+        )
+
+        if old_product is not None:
+            index = updated_products.index(old_product)
+            updated_products[index] = new_product
+
+        else:
+            updated_products.append(new_product)
+
+    return updated_products
