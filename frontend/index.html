@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhoneMatch — Smart Phone Advisor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">P</span><span>PhoneMatch</span></div>
+    <span class="status"><i></i> Live product data</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">SMART PHONE ADVISOR</div>
+      <h1>Find the phone that fits <span>you.</span></h1>
+      <p>Tell us what matters. We rank real products against your priorities instead of making you compare dozens of spec sheets.</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div><span class="step">01</span><div><h2>Your priorities</h2><p>Set the importance of each feature.</p></div></div>
+        <div class="budget"><label for="budget">Budget</label><strong id="budgetValue">30,000,000 تومان</strong><input id="budget" type="range" min="10000000" max="100000000" step="1000000" value="30000000"></div>
+      </div>
+
+      <div class="priority-grid">
+        <article class="priority-card active" data-feature="camera"><div class="feature-icon">◎</div><div><h3>Camera</h3><p>Photo & video quality</p></div><select><option value="1">Low</option><option value="2" selected>Medium</option><option value="3">High</option></select></article>
+        <article class="priority-card active" data-feature="performance"><div class="feature-icon">⚡</div><div><h3>Performance</h3><p>Gaming & multitasking</p></div><select><option value="1">Low</option><option value="2">Medium</option><option value="3" selected>High</option></select></article>
+        <article class="priority-card active" data-feature="battery"><div class="feature-icon">▰</div><div><h3>Battery</h3><p>Battery life & charging</p></div><select><option value="1">Low</option><option value="2">Medium</option><option value="3" selected>High</option></select></article>
+        <article class="priority-card active" data-feature="display"><div class="feature-icon">▣</div><div><h3>Display</h3><p>Quality & refresh rate</p></div><select><option value="1">Low</option><option value="2" selected>Medium</option><option value="3">High</option></select></article>
+        <article class="priority-card" data-feature="storage"><div class="feature-icon">▤</div><div><h3>Storage</h3><p>Capacity for apps & media</p></div><select><option value="1" selected>Low</option><option value="2">Medium</option><option value="3">High</option></select></article>
+        <article class="priority-card" data-feature="weight"><div class="feature-icon">◇</div><div><h3>Lightweight</h3><p>Comfort in daily use</p></div><select><option value="1" selected>Low</option><option value="2">Medium</option><option value="3">High</option></select></article>
+      </div>
+
+      <div class="actions"><button id="findBtn" class="primary">Find my best match <span>→</span></button><button id="resetBtn" class="ghost">Reset</button></div>
+    </section>
+
+    <section id="results" class="results hidden">
+      <div class="results-head"><div><div class="eyebrow">YOUR MATCHES</div><h2>Best phones for your priorities</h2></div><span id="matchCount" class="count">3 matches</span></div>
+      <div id="resultList" class="result-list"></div>
+    </section>
+  </main>
+
+  <footer>PhoneMatch UI prototype · Recommendation engine will be connected to Django next.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
