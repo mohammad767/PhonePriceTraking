@@ -37,6 +37,7 @@ def get_price_change(old_product, new_product) :
             "new_price" : new_product.price,
             "change" : change,
             "url" : new_product.url,
+            "source" : new_product.source,
             "status" : "Increased",
             "timestamp": timestamp
         }
@@ -47,6 +48,7 @@ def get_price_change(old_product, new_product) :
             "new_price" : new_product.price,
             "change" : change,
             "url" : new_product.url,
+            "source" : new_product.source,
             "status" : "Decreased",
             "timestamp": timestamp
         }
@@ -57,6 +59,7 @@ def get_price_change(old_product, new_product) :
             "new_price" : new_product.price,
             "change" : change,
             "url" : new_product.url,
+            "source" : new_product.source,
             "status" : "Unchanged",
             "timestamp": timestamp
         }

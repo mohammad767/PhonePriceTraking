@@ -80,7 +80,7 @@ def parse_products(response):
         if not name_tag:
             print("Error: Could not find the name tag for a phone.")
             continue
-
+        print(type(phone), repr(phone))
         name = name_tag.get_text(strip=True)
 
         price_tag = phone.find(
@@ -178,7 +178,11 @@ def choose_extra_filters():
     )
 
     if min_price.strip():
-        params["pfrom"] = int(min_price)
+        try:
+            params["pfrom"] = int(min_price)
+
+        except ValueError:
+            print("Invalid Price. Price Filter Was Skipped.")
 
     ram_map = {
         "8": "195",
@@ -203,7 +207,6 @@ def choose_extra_filters():
             print("Invalid Choice")
 
     return params
-
 
 def choose_series(brand):
     series_map = {
@@ -371,32 +374,63 @@ def choose_digikala_brand():
 
 
 def choose_digikala_filters():
-   
+
     params = {}
 
-    add_filters = input("Do You Want More Filters? (Y/N): ").lower()
+    add_filters = input(
+        "Do You Want More Filters? (Y/N): "
+    ).lower()
+
     if add_filters != "y":
         return params
 
-    min_price = input("Enter The Min Price In Toman (blank to skip): ")
+    min_price = input(
+        "Enter The Min Price In Toman (blank to skip): "
+    )
+
     if min_price.strip():
-        params["price[min]"] = int(min_price) * 10 
+        try:
+            params["price[min]"] = int(min_price) * 10
+        except ValueError:
+            print("Invalid Min Price. Price Filter Was Skipped.")
 
-    max_price = input("Enter The Max Price In Toman (blank to skip): ")
+    max_price = input(
+        "Enter The Max Price In Toman (blank to skip): "
+    )
+
     if max_price.strip():
-        params["price[max]"] = int(max_price) * 10
+        try:
+            params["price[max]"] = int(max_price) * 10
+        except ValueError:
+            print("Invalid Max Price. Price Filter Was Skipped.")
 
-    add_ram = input("Do You Want To Filter RAM? (Y/N): ").lower()
+    add_ram = input(
+        "Do You Want To Filter RAM? (Y/N): "
+    ).lower()
+
     if add_ram == "y":
-        ram_map = {"4": "4", "6": "6", "8": "8", "12": "12"}
+        ram_map = {
+            "4": "4",
+            "6": "6",
+            "8": "8",
+            "12": "12"
+        }
+
         while True:
-            ram = input("Enter RAM Amount (4/6/8/12): ")
+            ram = input(
+                "Enter RAM Amount (4/6/8/12): "
+            )
+
             if ram in ram_map:
                 params["ram[]"] = ram_map[ram]
                 break
+
             print("Invalid Choice")
 
-    add_sort = input("Do You Want To Sort Results? (Y/N): ").lower()
+    add_sort = input(
+        "Do You Want To Sort Results? (Y/N): "
+    ).lower()
+
     if add_sort == "y":
         sort_map = {
             "cheapest": "4",
@@ -404,12 +438,17 @@ def choose_digikala_filters():
             "newest": "2",
             "popular": "7",
         }
+
         while True:
             print(f"Sort Options: {list(sort_map.keys())}")
-            sort_choice = input("Enter Your Choice: ").lower()
+            sort_choice = input(
+                "Enter Your Choice: "
+            ).lower()
+
             if sort_choice in sort_map:
                 params["sort"] = sort_map[sort_choice]
                 break
+
             print("Invalid Choice")
 
     return params
