@@ -1,3 +1,7 @@
+
+import pprint 
+pp = pprint.PrettyPrinter(indent=4)
+
 from app.scraper import (
     technolife_scraper,
     handle_scrape_by_brand,
@@ -77,7 +81,8 @@ def main():
             update_prices()
 
         elif choice == "3":
-            show_price_history()
+            history = load_price_history()
+            pp.pprint(history)
 
         elif choice == "4":
             products = handle_scrape_by_brand()

@@ -79,7 +79,7 @@ def load_price_history():
         
             if content:
                 history = json.loads(content)
-                return pp.pprint(history)
+                return history
             else : 
                 print("File Is Empty!")
                 return []

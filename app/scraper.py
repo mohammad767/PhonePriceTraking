@@ -80,7 +80,6 @@ def parse_products(response):
         if not name_tag:
             print("Error: Could not find the name tag for a phone.")
             continue
-        print(type(phone), repr(phone))
         name = name_tag.get_text(strip=True)
 
         price_tag = phone.find(
